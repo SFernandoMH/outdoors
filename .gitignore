@@ -1,0 +1,38 @@
+# --- CLion / JetBrains ---
+.idea/
+cmake-build-*/
+
+# --- Otras carpetas de compilación ---
+build/
+out/
+bin/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
+# --- Binarios y objetos ---
+*.exe
+*.o
+*.obj
+*.a
+*.lib
+*.pdb
+*.ilk
+
+# --- Librería SFML (se descarga aparte, ver README) ---
+SFML-*/
+
+# --- Editores ---
+.vs/
+.vscode/
+*.user
+*.suo
+
+# --- Sistema operativo ---
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# --- Temporales y registros ---
+*.log
+*.tmp

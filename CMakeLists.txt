@@ -12,6 +12,16 @@ find_package(SFML 3 REQUIRED COMPONENTS Graphics)
 file(GLOB_RECURSE FUENTES src/*.cpp)
 add_executable(OUTDOORS ${FUENTES}
         src/Player.cpp
-        include/Player.h)
+        include/Player.h
+        src/Door.cpp
+        include/Door.h
+        src/Room.cpp
+        include/Room.h
+        src/Shelf.cpp
+        include/Shelf.h
+        src/Item.cpp
+        include/Item.h
+        src/Bandage.cpp
+        include/Bandage.h)
 target_include_directories(OUTDOORS PRIVATE include)
 target_link_libraries(OUTDOORS PRIVATE SFML::Graphics)

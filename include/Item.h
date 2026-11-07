@@ -5,9 +5,11 @@
 class Item {
     protected:
         std::string name;
+        bool used;
     public:
-        Item(std::string name);
+        Item(const std::string& name);
         virtual ~Item();
+        [[nodiscard]]virtual bool isUsed() const;
         virtual void use(Entity& target) = 0;
 };
 

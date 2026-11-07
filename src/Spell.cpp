@@ -1,5 +1,8 @@
-//
-// Created by USUARIO on 6/11/2026.
-//
+#include "Spell.h"
 
-#include "../include/Spell.h"
+Spell::Spell(const std::string& name, int _spellDamage) : Item(name) , spellDamage(_spellDamage) {}
+
+void Spell::use(Entity& target) {
+    this->used = true;
+    target.setDamagePA(target.getDamagePA()*this->spellDamage);
+}

@@ -1,5 +1,15 @@
-//
-// Created by USUARIO on 6/11/2026.
-//
+#include "Item.h"
+#include <string>
 
-#include "../include/Item.h"
+Item::Item(const std::string& name) : name(name), used(false) {
+}
+
+Item::~Item() = default;
+
+bool Item::isUsed() const {
+    return false;
+}
+
+
+
+

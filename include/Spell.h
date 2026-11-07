@@ -4,7 +4,7 @@ class Spell  : public Item{
     private:
         int spellDamage;
     public:
-        Spell();
+        Spell(const std::string& name, int _spellDamage);
         void use(Entity& target) override;
 
 };

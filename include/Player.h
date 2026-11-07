@@ -1,18 +1,20 @@
 #pragma once
 #include "Entity.h"
 #include "Item.h"
+#include "Shelf.h"
 #include <vector>
 
 class Player : public Entity {
     private:
-        int damagePerAttack;
-        std::vector<Item> inventory;
+        std::vector<Item*> inventory;
 
     public:
         Player();
-         
-        void attack(Entity& objective) override;
+        ~Player() override;
 
+        void attack(Entity& objective) override;
+        void searchInShelf(Shelf* shelf);
+        void hitShelf(int force, Shelf* shelf);
 };
 
 

@@ -22,6 +22,8 @@ add_executable(OUTDOORS ${FUENTES}
         src/Item.cpp
         include/Item.h
         src/Bandage.cpp
-        include/Bandage.h)
+        include/Bandage.h
+        src/Spell.cpp
+        include/Spell.h)
 target_include_directories(OUTDOORS PRIVATE include)
 target_link_libraries(OUTDOORS PRIVATE SFML::Graphics)

@@ -11,5 +11,6 @@ class Entity {
         bool isAlive() const;
         virtual void attack(Entity& objective) = 0;
         void takeDamage(int damageAmount);
+        void heal(int amount);
 
 };

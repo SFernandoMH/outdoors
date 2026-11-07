@@ -26,6 +26,8 @@ add_executable(OUTDOORS ${FUENTES}
         src/Spell.cpp
         include/Spell.h
         src/InvisibleCreature.cpp
-        include/InvisibleCreature.h)
+        include/InvisibleCreature.h
+        src/DarkBeing.cpp
+        include/DarkBeing.h)
 target_include_directories(OUTDOORS PRIVATE include)
 target_link_libraries(OUTDOORS PRIVATE SFML::Graphics)

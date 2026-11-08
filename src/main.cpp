@@ -1,6 +1,6 @@
-#include "Room.h"
-#include "Door.h"
-#include "iostream"
-int main() {
+#include "Game.h"
 
+int main() {
+    Game game;
+    game.run();
 }

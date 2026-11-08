@@ -11,6 +11,7 @@ class Door {
     public:
         Door(Room* roomA, Room* roomB);
         ~Door() = default;
+        Room* getOtherRoom(const Room* current)const;
         [[nodiscard]] bool isOpen() const;
         void open();
         void close(int force);

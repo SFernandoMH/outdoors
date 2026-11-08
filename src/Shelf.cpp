@@ -7,6 +7,10 @@ std::vector<Item*> Shelf::getItemsOnIt() {
     return this->itemsOnIt;
 }
 
+bool Shelf::getisStanding() const  {
+    return this->isStanding;
+}
+
 void Shelf::addItem(Item* item) {
     this->itemsOnIt.push_back(item);
 }

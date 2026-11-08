@@ -12,6 +12,7 @@ public:
     ~Shelf();
 
     std::vector<Item*> getItemsOnIt();
+    [[nodiscard]] bool getisStanding() const ;
     void addItem(Item* item);
     void removeItem(const Item* item);
     void hit(int force);

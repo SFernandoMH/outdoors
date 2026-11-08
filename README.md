@@ -42,10 +42,10 @@ En la versión de texto, estas mismas acciones se eligen escribiendo la opción 
 
 - [x] Clase base abstracta `Entity` (con `attack()` virtual puro)
 - [x] `Player`, el gato, que hereda de `Entity`
-- [ ] `Shelf` (estantería) y `Room` (habitación)
-- [ ] Dos tipos de enemigo con ataque propio
-- [ ] Puertas y portazo
-- [ ] Objetos e inventario (`std::vector`)
+- [x] `Shelf` (estantería) y `Room` (habitación)
+- [x] Dos tipos de enemigo con ataque propio
+- [x] Puertas y portazo
+- [x] Objetos e inventario (`std::vector`)
 - [ ] Bucle del juego y combate por turnos
 - [ ] Documento final y presentación
 - [ ] Versión gráfica con SFML (opcional)

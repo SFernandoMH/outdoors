@@ -29,6 +29,10 @@ void Room::addDoor(Door* door) {
     doors.push_back(door);
 }
 
+std::string Room::getDescription() const {
+    return description;
+}
+
 std::vector<Shelf*> Room::getShelves() const
 {
     return shelves;

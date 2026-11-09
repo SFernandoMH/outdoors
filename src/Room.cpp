@@ -22,6 +22,10 @@ void Room::applySlam(int force) {
 void Room::addShelf(Shelf* shelf) {
     shelves.push_back(shelf);
 }
+
+void Room::removeitemFromShelf(int index, Item* item) const  {
+    this->shelves[index]->removeItem(item);
+}
 void Room::addEntity(Entity* entity) {
     entities.push_back(entity);
 }

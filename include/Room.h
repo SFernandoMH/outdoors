@@ -23,6 +23,7 @@ public:
     ~Room();
     void applySlam(int force);
     void addShelf(Shelf* shelf);
+    void removeitemFromShelf(int index, Item* item) const;
     void addEntity(Entity* entity);
     void addDoor(Door* door);
     [[nodiscard]] std::string getDescription() const;

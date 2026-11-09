@@ -1,4 +1,5 @@
 #include "Room.h"
+#include <algorithm>
 
 Room::Room(const std::string& description) : description(description) {}
 
@@ -28,6 +29,11 @@ void Room::removeitemFromShelf(int index, Item* item) const  {
 }
 void Room::addEntity(Entity* entity) {
     entities.push_back(entity);
+}
+
+bool Room::hasLivinEntities() const {
+    return std::any_of(entities.begin(), entities.end(),
+                       [](const Entity* e) { return e->isAlive(); });
 }
 void Room::addDoor(Door* door) {
     doors.push_back(door);

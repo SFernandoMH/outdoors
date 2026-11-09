@@ -25,6 +25,7 @@ public:
     void addShelf(Shelf* shelf);
     void removeitemFromShelf(int index, Item* item) const;
     void addEntity(Entity* entity);
+    [[nodiscard]] bool hasLivinEntities() const;
     void addDoor(Door* door);
     [[nodiscard]] std::string getDescription() const;
     [[nodiscard]] std::vector<Shelf*> getShelves() const;

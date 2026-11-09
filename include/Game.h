@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Player.h"
 #include "Room.h"
 #include "Door.h"
@@ -11,6 +12,7 @@ class Game {
     private:
         Player* player;
         Room* currentRoom;
+        Door* lastDoor;
         std::vector<Room*> rooms;
         std::vector<Door*> doors;
     public:

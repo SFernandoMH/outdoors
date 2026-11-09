@@ -26,8 +26,8 @@ public:
     void addEntity(Entity* entity);
     void addDoor(Door* door);
     [[nodiscard]] std::string getDescription() const;
-    [[nodiscard]] std::vector<Shelf*> getShelves() const ;
-    [[nodiscard]] std::vector<Entity*> getEntities()const ;
+    [[nodiscard]] std::vector<Shelf*> getShelves() const;
+    [[nodiscard]] std::vector<Entity*> getEntities() const;
     [[nodiscard]] std::vector<Door*> getDoors() const;
 
 };

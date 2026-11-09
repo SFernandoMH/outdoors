@@ -1,7 +1,15 @@
 #include "Shelf.h"
 #include <algorithm>
-Shelf::Shelf(int resistance) : isStanding(true) , resistance(resistance)  {}
+Shelf::Shelf(int resistance) : isStanding(true) , resistance(resistance), fallDamage(60)  {}
 Shelf::~Shelf() = default;
+
+int Shelf::getFallDamage() const {
+    return this->fallDamage;
+}
+
+int Shelf::getResistance() const {
+    return this->resistance;
+}
 
 std::vector<Item*> Shelf::getItemsOnIt() {
     return this->itemsOnIt;
@@ -22,10 +30,12 @@ void Shelf::removeItem(const Item* item) {
     }
 
 }
-void Shelf::hit(int force) {
+bool Shelf::hit(int force) {
     if (force >= resistance) {
         isStanding = false;
+        return true;
     }
+    return false;
 }
 
 void Shelf::fall() {

@@ -14,7 +14,7 @@ class Door {
         Room* getOtherRoom(const Room* current)const;
         [[nodiscard]] bool isOpen() const;
         void open();
-        void close(int force);
+        void close();
 
 };
 

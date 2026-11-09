@@ -38,7 +38,7 @@ std::vector<Shelf*> Room::getShelves() const
     return shelves;
 }
 
-std::vector<Entity*> Room::getEntities() const  {
+std::vector<Entity*> Room::getEntities() const {
     return entities;
 }
 

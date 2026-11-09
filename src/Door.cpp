@@ -17,7 +17,6 @@ void Door::open() {
     this->open_ = true;
 }
 
-void Door::close(int force) {
-
+void Door::close() {
     this->open_ = false;
 }

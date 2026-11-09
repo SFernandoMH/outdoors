@@ -1,6 +1,8 @@
 #include "Player.h"
 Player::Player() : Entity(100) {
     this->damagePerAttack = 10;
+    this->name = "Player";
+
 }
 
 Player::~Player() {

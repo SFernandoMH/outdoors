@@ -1,6 +1,10 @@
 #include "Entity.h"
 
-Entity::Entity(int _hp) : hp(_hp), damagePerAttack(10) {}
+Entity::Entity(int _hp) : name("Default") , hp(_hp), damagePerAttack(10) {}
+
+std::string Entity::getName() {
+    return this->name;
+}
 
 int Entity::getHp() const{
     return this->hp;

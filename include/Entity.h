@@ -1,7 +1,9 @@
 #pragma once
+#include <string>
 
 class Entity {
     protected:
+        std::string name;
         int hp;
         int damagePerAttack;
     public:
@@ -9,6 +11,7 @@ class Entity {
         virtual ~Entity() = default;
 
         [[nodiscard]] int getHp() const;
+        std::string getName();
         [[nodiscard]] bool isAlive() const;
         void setDamagePA(int damage);
         [[nodiscard]] int getDamagePA() const;

@@ -38,13 +38,11 @@ void Player::searchInShelf(Shelf *shelf) {
     std::vector<Item*> itemsOnIt = shelf->getItemsOnIt();
     for ( Item* item : itemsOnIt) {
         inventory.push_back(item);
-        shelf->removeItem(item);
     }
 }
 
 void Player::hitShelf(int force, Shelf* shelf) {
     shelf->hit(force);
-
 }
 
 

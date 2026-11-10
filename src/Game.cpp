@@ -207,10 +207,7 @@ void Game::crossDoor() {
 }
 
 void Game::fight() {
-
-
-
-
+    
     std::vector<Entity*> enemies = currentRoom->getEntities();
     if (std::empty(enemies)) {
         std::cout << "No hay enemigos en esta habitacion!\n";

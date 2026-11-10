@@ -3,7 +3,7 @@
 #include "Bandage.h"
 #include "DarkBeing.h"
 #include "iostream"
-
+#include "Spell.h"
 Game::Game() : player(new Player()), currentRoom(nullptr) , lastDoor(nullptr) {
     buildMap();
 }
@@ -26,24 +26,56 @@ std::vector<Entity*> Game::getEntitiesCurrentRoom() const {
 void Game::buildMap() {
     Room* entrada = new Room("Entrada de la biblioteca");
     Room* pasillo = new Room("Pasillo de libros");
+    Room* esquinaMisteriosa = new Room("Esquina abandonada");
 
-    //
+    rooms.push_back(entrada);
+    rooms.push_back(pasillo);
+    rooms.push_back(esquinaMisteriosa);
+
+    //Entrada
     entrada->addShelf(new Shelf(3));
     entrada->addShelf(new Shelf(4));
-    entrada->addEntity(new DarkBeing());
 
+    entrada->getShelves()[0]->addItem(new Spell("Aumento de dano x2", 2));
     for (Shelf* shelf : entrada->getShelves()) {
         shelf->addItem(new Bandage("Benda"));
     }
 
+    //conexion entrada a pasillo
 
-    rooms.push_back(entrada);
-    rooms.push_back(pasillo);
+    Door* doorEPone = new Door(entrada, pasillo);
+    doors.push_back(doorEPone);
+    entrada->addDoor(doorEPone);
+    pasillo->addDoor(doorEPone);
 
-    Door* doorEone = new Door(entrada, pasillo);
-    doors.push_back(doorEone);
-    entrada->addDoor(doorEone);
-    pasillo->addDoor(doorEone);
+
+    //pasillo
+    pasillo->addShelf(new Shelf(5));
+    pasillo->addShelf(new Shelf(8));
+    pasillo->addShelf(new Shelf(9));
+
+
+    pasillo->getShelves()[2]->addItem(new Spell("Aumento de dano x4",4));
+    pasillo->addEntity(new DarkBeing());
+
+    //conexion pasillo a esquina
+
+    Door* doorPEtwo = new Door(pasillo, esquinaMisteriosa);
+    doors.push_back(doorPEtwo);
+    pasillo->addDoor(doorPEtwo);
+    esquinaMisteriosa->addDoor(doorPEtwo);
+
+    //Esquina
+
+    esquinaMisteriosa->addShelf(new Shelf(10));
+    esquinaMisteriosa->getShelves()[0]->addItem(new Bandage("Botiquin")); // posible armadura
+
+    esquinaMisteriosa->addEntity(new DarkBeing());
+    esquinaMisteriosa->addEntity(new DarkBeing());
+
+
+
+    //Por defecto inicias en entrada
 
     currentRoom = entrada;
 }
@@ -66,7 +98,7 @@ int Game::showMenuRoom() const {
 
 
 
-void Game::showInventory() const{
+void Game::showInventory() {
     int option;
     if (player->getInventory().empty()) {
         std::cout << "No tienes nada!\n";
@@ -89,7 +121,7 @@ void Game::showInventory() const{
     }
 }
 
-void Game::checkShelves() const  {
+void Game::checkShelves() {
     std::vector<Shelf*> currentShelves= currentRoom->getShelves();
     if (currentShelves.empty()) {
         std::cout << "No hay ningun estante!\n";
@@ -159,7 +191,6 @@ void Game::crossDoor() {
                     std::cout << "Un estante de la habitacion " << previous->getDescription()<< " se cayo!\n";
                     std::cout << "le aplica 60 de dano a todas los enemigos!\n";
                     for (Entity* entity : previous->getEntities()) {
-                        entity->takeDamage(60);
                         if (entity->isAlive() == false) {
                             std::cout << "Un enemigo murio\n";
                         }
@@ -199,7 +230,14 @@ void Game::fight() {
                 std::cout << i + 1 << " . " << enemies[i]->getName() << "\n";
             }
             std::cin >> option;
-            player->attack(*enemies[option - 1]);
+            if (!(option >= 0 && option <= enemies.size())) {
+                std::cout << "Ese enemigo no existe!\n";
+                continue;
+            }
+            if (option >= 1 && option <= enemies.size()) {player->attack(*enemies[option - 1]);}
+            else { std::cout << "Ingresa una opcion valida!\n";
+                continue;
+            }
         } else if (option == 2) {
             if (std::empty(player->getInventory())) {
                 std::cout << "No tienes ningun item!\n";
@@ -210,9 +248,16 @@ void Game::fight() {
                 std::cout << i + 1 << " . "<<  player->getInventory()[i]->getName() << "\n";
             } std::cout << ">";
             std::cin >> option;
-            std::cout << "Se uso : " << player->getInventory()[option - 1]->getName() << "\n";
-            player->useItem(option - 1);
+            if (option >= 1 && option <= player->getInventory().size()) {
+                std::cout << "Se uso : " << player->getInventory()[option - 1]->getName() << "\n";
+                player->useItem(option - 1);
+            } else {
+                continue;
+            }
 
+        } else {
+            std::cout << "Ingresa una opcion valida!\n";
+            continue;
         }
 
         // Turno de los enemigos

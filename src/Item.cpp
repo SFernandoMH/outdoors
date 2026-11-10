@@ -11,7 +11,7 @@ std::string Item::getName() const {
 }
 
 bool Item::isUsed() const {
-    return false;
+    return used;
 }
 
 

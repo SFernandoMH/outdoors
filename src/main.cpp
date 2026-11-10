@@ -1,5 +1,5 @@
 #include "Game.h"
-
+#include <iostream>
 int main() {
     Game game;
     int option = -1;
@@ -13,6 +13,8 @@ int main() {
             game.crossDoor();
         } else if (useroption == 4) {
             game.fight();
+        } else {
+            std::cout << "Opcion invalida!\n";
         }
     }
 

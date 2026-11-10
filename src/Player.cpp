@@ -16,7 +16,7 @@ std::vector<Item*> Player::getInventory() const {
 }
 
 void Player::addItem(Item* item) {
-    inventory.push_back(item);
+    if (item != nullptr) {inventory.push_back(item);}
 }
 
 void Player::useItem(int index) {

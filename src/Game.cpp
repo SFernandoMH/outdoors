@@ -16,6 +16,11 @@ Game::~Game() {
     for (Door* door : doors) {
         delete door;
     }
+
+}
+
+std::vector<Entity*> Game::getEntitiesCurrentRoom() const {
+    return currentRoom->getEntities();
 }
 
 void Game::buildMap() {
@@ -46,12 +51,13 @@ void Game::buildMap() {
 
 int Game::showMenuRoom() const {
     std::cout << "Estas en: " << currentRoom->getDescription()<< "\n";
-
+    if (currentRoom->hasLivinEntities()) {return 4;}
     std::cout<< "Que deseas hacer?\n"
                 "0. Abandonar juego\n"
                 "1. Que tengo en mi inventario?\n"
                 "2. Revisar estanterias\n"
-                "3. Abrir puertas\n>";
+                "3. Abrir puertas\n"
+                "4. Pelear contra enemigos\n>";
     int option;
     std::cin >> option;
     std::cout << "\n";
@@ -60,11 +66,11 @@ int Game::showMenuRoom() const {
 
 
 
-int Game::showInventory() const{
+void Game::showInventory() const{
     int option;
     if (player->getInventory().empty()) {
         std::cout << "No tienes nada!\n";
-        return 0;
+        return;
     }
     std::cout << "Tienes: \n";
     for (size_t i = 0; i < player->getInventory().size(); i++) {
@@ -77,17 +83,17 @@ int Game::showInventory() const{
         std::cin >> option;
         std::cout << "Se uso " << player->getInventory()[option - 1]->getName() << "\n";
         player->useItem(option-1);
-        return 0;
+        return;
     } else {
-        return 0;
+        return;
     }
 }
 
-int Game::checkShelves() const  {
+void Game::checkShelves() const  {
     std::vector<Shelf*> currentShelves= currentRoom->getShelves();
     if (currentShelves.empty()) {
         std::cout << "No hay ningun estante!\n";
-        return 0;
+        return;
     }
     for (size_t i = 0; i < currentShelves.size(); i++) {
         std::cout << i + 1 << ". Revisar la estanteria " <<  i + 1 << "\n";
@@ -95,8 +101,21 @@ int Game::checkShelves() const  {
     std::cout << "0. Salir" << "\n";
     int option;
     std::cin >> option;
-    if (option == 0) {
-        return 0;
+
+    Shelf* shelf = currentShelves[option -1];
+    if (shelf->getItemsOnIt().empty()) {
+        std::cout << "El estante esta vacio\n";
+        return;
+    }
+
+    Item* item = shelf->takeItem(0);        // saca el primero del estante
+    while (item != nullptr) {
+        player->addItem(item);              // pasa al inventario
+        std::cout << "Obtuviste: " << item->getName() << "\n";
+        item = shelf->takeItem(0);          // el siguiente
+    }
+    /*if (option == 0) {
+        return;
     } else if (option >= 1 && option <= currentShelves.size()) {
         Shelf* shelf = currentShelves[option - 1];
         player->searchInShelf(shelf);
@@ -104,8 +123,8 @@ int Game::checkShelves() const  {
             std::cout << "Obtuviste : " << item->getName() << "\n";
             currentRoom->removeitemFromShelf(option -1, item);
         }
-        return 0;
-    } return 0;
+        return;
+    }*/
 }
 
 void Game::crossDoor() {
@@ -150,6 +169,66 @@ void Game::crossDoor() {
 
         }
     }
+}
+
+void Game::fight() {
+
+
+
+    //Menu Pelea
+    std::cout << "Has entrado en combate!\n";
+
+
+    std::vector<Entity*> enemies = currentRoom->getEntities();
+    if (std::empty(enemies)) {
+        std::cout << "No hay enemigos en esta habitacion!\n";
+        return;
+    }
+    while (player->isAlive() && currentRoom->hasLivinEntities()) {
+        std::cout << "Estas peleando contra :\n";
+        for (size_t i = 0; i < enemies.size(); i++) {
+            std::cout << i + 1 << " . " << enemies[i]->getName() << "\n";
+        }
+        std::cout << "Que deseas hacer?\n"
+                     "1. Atacar\n2. Usar objeto\n>";
+        int option;
+        std::cin >> option;
+        if (option == 1) {
+            std::cout << "A que criatura atacaras?\n";
+            for (size_t i = 0; i < enemies.size(); i++) {
+                std::cout << i + 1 << " . " << enemies[i]->getName() << "\n";
+            }
+            std::cin >> option;
+            player->attack(*enemies[option - 1]);
+        } else if (option == 2) {
+            if (std::empty(player->getInventory())) {
+                std::cout << "No tienes ningun item!\n";
+                continue;//Sales de usar objeto
+            }
+            std::cout << "Que objeto quieres usar?\n";
+            for (size_t i = 0; i < player->getInventory().size(); i++ ) {
+                std::cout << i + 1 << " . "<<  player->getInventory()[i]->getName() << "\n";
+            } std::cout << ">";
+            std::cin >> option;
+            std::cout << "Se uso : " << player->getInventory()[option - 1]->getName() << "\n";
+            player->useItem(option - 1);
+
+        }
+
+        // Turno de los enemigos
+        for (Entity* e : enemies) {
+            if (e->isAlive()) {
+                e->attack(*player);
+            }
+        }
+        std::cout << "Tu vida: " << player->getHp() << "\n";
+
+
+    }
+    if (!player->isAlive()) std::cout << "Has caido...\n";
+    else std::cout << "Ganaste el combate!\n";
+
+
 }
 
 

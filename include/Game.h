@@ -18,10 +18,12 @@ class Game {
     public:
         Game();
         ~Game();
+        [[nodiscard]] std::vector<Entity*> getEntitiesCurrentRoom()  const;
         [[nodiscard]] int showMenuRoom() const; // Muestra lo que puedes hacer en la habitacion
-        [[nodiscard]] int showInventory() const;
-        [[nodiscard]] int checkShelves() const;
+        void showInventory() const;
+        void checkShelves() const;
         void crossDoor();
+        void fight();
         void buildMap();
         void run();
 };

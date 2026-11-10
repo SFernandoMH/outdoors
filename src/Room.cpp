@@ -14,6 +14,7 @@ Room::~Room() {
     }
 }
 
+
 void Room::applySlam(int force) {
     for (Shelf* shelf : shelves) {
         shelf->hit(force);

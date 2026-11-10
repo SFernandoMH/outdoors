@@ -6,11 +6,13 @@ int main() {
     while (option != 0) {
         int useroption = game.showMenuRoom();
         if (useroption == 1) {
-            game.showInventory(); // ARREGLAR!!
+            game.showInventory();
         } else if (useroption == 2) {
             game.checkShelves();
         } else if (useroption == 3) {
             game.crossDoor();
+        } else if (useroption == 4) {
+            game.fight();
         }
     }
 

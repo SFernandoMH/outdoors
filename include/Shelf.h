@@ -17,6 +17,8 @@ public:
     [[nodiscard]] int getResistance() const;
     std::vector<Item*> getItemsOnIt();
     [[nodiscard]] bool getisStanding() const ;
+
+    Item* takeItem(int index);
     void addItem(Item* item);
     void removeItem(const Item* item);
     bool hit(int force);

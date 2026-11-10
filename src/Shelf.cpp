@@ -19,6 +19,19 @@ bool Shelf::getisStanding() const  {
     return this->isStanding;
 }
 
+// Shelf.h
+Item* takeItem(int index);
+
+// Shelf.cpp
+Item* Shelf::takeItem(int index) {
+    if (index < 0 || index >= itemsOnIt.size()) {
+        return nullptr;
+    }
+    Item* item = itemsOnIt[index];
+    itemsOnIt.erase(itemsOnIt.begin() + index);   // solo lo quita, no lo borra
+    return item;
+}
+
 void Shelf::addItem(Item* item) {
     this->itemsOnIt.push_back(item);
 }

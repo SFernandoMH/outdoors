@@ -24,6 +24,7 @@ public:
     void applySlam(int force);
     void addShelf(Shelf* shelf);
     void removeitemFromShelf(int index, Item* item) const;
+    void removeDeadEntities();
     void addEntity(Entity* entity);
     [[nodiscard]] bool hasLivinEntities() const;
     void addDoor(Door* door);

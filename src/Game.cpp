@@ -134,6 +134,10 @@ void Game::checkShelves() {
     int option;
     std::cin >> option;
 
+    if (option <=0 || option > currentShelves.size()) {
+        std::cout << "Numero invalido!\n";
+    }
+
     Shelf* shelf = currentShelves[option -1];
     if (shelf->getItemsOnIt().empty()) {
         std::cout << "El estante esta vacio\n";
@@ -165,7 +169,7 @@ void Game::crossDoor() {
     for (size_t i = 0; i < exits.size(); i++) {
         std::cout << i + 1 << ". Abrir la puerta " << i + 1 << "\n";
     }
-    std::cout << "0. Salir" << "\n";
+    std::cout << "0. Quedarse en la habitacion " << "\n";
     std::cin >> option;
     if (option == 0) {
         return;
@@ -206,15 +210,16 @@ void Game::fight() {
 
 
 
-    //Menu Pelea
-    std::cout << "Has entrado en combate!\n";
-
 
     std::vector<Entity*> enemies = currentRoom->getEntities();
     if (std::empty(enemies)) {
         std::cout << "No hay enemigos en esta habitacion!\n";
         return;
     }
+
+    //Menu Pelea
+    std::cout << "Has entrado en combate!\n";
+
     while (player->isAlive() && currentRoom->hasLivinEntities()) {
         std::cout << "Estas peleando contra :\n";
         for (size_t i = 0; i < enemies.size(); i++) {
@@ -227,12 +232,15 @@ void Game::fight() {
         if (option == 1) {
             std::cout << "A que criatura atacaras?\n";
             for (size_t i = 0; i < enemies.size(); i++) {
-                std::cout << i + 1 << " . " << enemies[i]->getName() << "\n";
+                std::cout << i + 1 << " . " << enemies[i]->getName() << " Vida: " << enemies[i]->getHp()<< "\n";
             }
             std::cin >> option;
-            if (!(option >= 0 && option <= enemies.size())) {
+            if (!(option >= 1 && option <= enemies.size())) {
                 std::cout << "Ese enemigo no existe!\n";
                 continue;
+            }
+            if (!enemies[option -1]->isAlive()) {
+                std::cout  << "El enemigo esta muerto";
             }
             if (option >= 1 && option <= enemies.size()) {player->attack(*enemies[option - 1]);}
             else { std::cout << "Ingresa una opcion valida!\n";
@@ -272,6 +280,7 @@ void Game::fight() {
     }
     if (!player->isAlive()) std::cout << "Has caido...\n";
     else std::cout << "Ganaste el combate!\n";
+    currentRoom->removeDeadEntities();
 
 
 }
@@ -279,5 +288,6 @@ void Game::fight() {
 
 void Game::run() {
     std::cout << this->player->getHp() << "\n";
+    this->showInventory();
 
 }

@@ -36,6 +36,16 @@ bool Room::hasLivinEntities() const {
     return std::any_of(entities.begin(), entities.end(),
                        [](const Entity* e) { return e->isAlive(); });
 }
+
+void Room::removeDeadEntities() {
+    for (int i = 0; i < entities.size(); ) {
+        if (!entities[i]->isAlive()) {
+            delete entities[i];
+            entities.erase(entities.begin() + i);
+        } else {i++;}
+    }
+}
+
 void Room::addDoor(Door* door) {
     doors.push_back(door);
 }

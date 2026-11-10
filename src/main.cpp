@@ -13,7 +13,8 @@ int main() {
             game.crossDoor();
         } else if (useroption == 4) {
             game.fight();
-        } else {
+        } else if (useroption == 0) {break;}
+        else {
             std::cout << "Opcion invalida!\n";
         }
     }

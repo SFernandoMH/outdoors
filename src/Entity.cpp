@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-Entity::Entity(int _hp) : name("Default") , hp(_hp), damagePerAttack(10) {}
+Entity::Entity(int _hp) : name("Default") , hp(_hp),defense(0), damagePerAttack(10) {}
 
 std::string Entity::getName() {
     return this->name;
@@ -8,6 +8,14 @@ std::string Entity::getName() {
 
 int Entity::getHp() const{
     return this->hp;
+}
+
+int Entity::getDefense() const {
+    return this->defense;
+}
+
+void Entity::setDefense(int amount) {
+    this->defense = amount;
 }
 
 
@@ -27,10 +35,10 @@ int Entity::getDamagePA() const {
 }
 
 void Entity::takeDamage(int damageAmount) {
-    this->hp -= damageAmount;
-    if (this->hp <= 0) {
-        this->hp = 0;
-    }
+    int real = damageAmount - defense;
+    if (real < 0) real = 0;
+    hp -= real;
+    if (hp < 0) hp = 0;
 }
 
 void Entity::heal(int amount) {

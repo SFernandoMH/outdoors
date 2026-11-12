@@ -5,12 +5,15 @@ class Entity {
     protected:
         std::string name;
         int hp;
+        int defense;
         int damagePerAttack;
     public:
         Entity(int _hp);
         virtual ~Entity() = default;
 
         [[nodiscard]] int getHp() const;
+        [[nodiscard]] int getDefense() const;
+        void setDefense(int amount);
         std::string getName();
         [[nodiscard]] bool isAlive() const;
         void setDamagePA(int damage);

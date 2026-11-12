@@ -9,7 +9,7 @@ class Item {
     public:
         Item(const std::string& name);
         virtual ~Item();
-        std::string getName() const;
+        [[nodiscard]] std::string getName() const;
         [[nodiscard]]virtual bool isUsed() const;
         virtual void use(Entity& target) = 0;
 };

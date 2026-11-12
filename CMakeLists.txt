@@ -30,6 +30,8 @@ add_executable(OUTDOORS ${FUENTES}
         src/DarkBeing.cpp
         include/DarkBeing.h
         include/Game.h
-        src/Game.cpp)
+        src/Game.cpp
+        include/Armor.h
+        src/Armor.cpp)
 target_include_directories(OUTDOORS PRIVATE include)
 target_link_libraries(OUTDOORS PRIVATE SFML::Graphics)

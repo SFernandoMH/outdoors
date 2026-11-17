@@ -15,6 +15,6 @@ class Door {
         [[nodiscard]] bool isOpen() const;
         void open();
         void close();
-
+        Room* whereItGoes(Room* current);
 };
 

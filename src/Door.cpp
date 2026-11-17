@@ -20,3 +20,13 @@ void Door::open() {
 void Door::close() {
     this->open_ = false;
 }
+
+Room *Door::whereItGoes(Room *current) {
+    if (current == roomA) {
+        return roomB;
+    } else if (current == roomB) {
+        return roomA;
+    }
+    return nullptr;
+}
+

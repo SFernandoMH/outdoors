@@ -21,8 +21,6 @@ int main() {
             std::cout << "Opcion invalida!\n";
         }
 
-
-
     }
 
 

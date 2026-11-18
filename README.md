@@ -60,35 +60,16 @@ En la versión de texto, estas mismas acciones se eligen escribiendo la opción 
 └── src/          # archivos .cpp (main.cpp, Entity.cpp, Player.cpp, ...)
 ```
 
-## Pilares de la POO en el proyecto
-
-| Pilar | Dónde se ve |
-|-------|-------------|
-| Encapsulamiento | Atributos `protected` en `Entity`, accedidos solo por métodos |
-| Abstracción | `Entity` es abstracta: `attack()` es virtual puro |
-| Herencia | `Player` y los enemigos heredan de `Entity` |
-| Polimorfismo | Cada clase implementa su propio `attack()`; se usa mediante `Entity*` |
-
-*(Se amplía a medida que se agregan clases.)*
-
 ## Requisitos
 
 - Compilador de C++17 (en CLion con MinGW: **GCC 14.2.0 UCRT**, el mismo que usa SFML)
 - CMake 3.28 o superior
-- [SFML 3.1.0](https://www.sfml-dev.org/download/sfml/3.1.0/) (el `CMakeLists.txt` actual la busca)
+- [SFML 3.1.0](https://www.sfml-dev.org/download/sfml/3.1.0/) (el `CMakeLists.txt` actual la busca) (opcional)
 
 ## Cómo compilar y ejecutar
 
 1. Clonar el repositorio.
-2. Descargar SFML 3.1.0 (versión **GCC 14.2.0 MinGW UCRT, 64-bit**) y extraerla en la raíz del proyecto, de modo que exista la carpeta `SFML-3.1.0/`. Esa carpeta no se sube al repositorio.
-3. Abrir el proyecto en CLion, recargar CMake y ejecutar el objetivo `OUTDOORS`.
-
-## Cómo se trabaja
-
-- Cada avance se sube en un commit pequeño que compila.
-- Formato de mensaje: `tipo(área): descripción corta`.
-  - Tipos: `feat` (algo nuevo), `fix` (corrección), `docs`, `refactor`, `test`.
-  - Ejemplo: `feat(player): jugador hereda de Entity con attack`.
+2. Abrir el proyecto en CLion, recargar CMake y ejecutar el objetivo `OUTDOORS`.
 
 ## Autor
 

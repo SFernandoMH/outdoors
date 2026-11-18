@@ -12,7 +12,8 @@ int main() {
         } else if (useroption == 3) {
             game.crossDoor();
         } else if (useroption == 4) {
-            game.fight();
+
+
             if (!std::empty(game.getEntitiesCurrentRoom())) {
                 game.crossDoor();
             }

@@ -18,7 +18,11 @@ Room::~Room() {
 void Room::applySlam(int force) {
     for (Shelf* shelf : shelves) {
         shelf->hit(force);
+        for (Entity* entity : entities) {
+            entity->takeDamage(60);
+        }
     }
+
 }
 
 void Room::addShelf(Shelf* shelf) {

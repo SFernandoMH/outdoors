@@ -9,7 +9,7 @@ Un gato curioso sigue a un pequeño fantasma con audífonos por una biblioteca i
 
 | Versión | Descripción | Estado |
 |---------|-------------|--------|
-| **Texto (consola)** | Combate por turnos, habitaciones, puertas, estanterías e inventario. Es la versión de entrega. | En desarrollo |
+| **Texto (consola)** | Combate por turnos, habitaciones, puertas, estanterías e inventario. Es la versión de entrega. | Completada |
 | **Gráfica (SFML)** | Mismo juego en 2D y en tiempo real, con controles de teclado. | Planeada, depende del tiempo |
 
 La lógica del juego (clases) está separada de la entrada y salida, para poder cambiar de la consola a SFML sin reescribirla.

@@ -13,10 +13,15 @@ int main() {
             game.crossDoor();
         } else if (useroption == 4) {
             game.fight();
+            if (!std::empty(game.getEntitiesCurrentRoom())) {
+                game.crossDoor();
+            }
         } else if (useroption == 0) {break;}
         else {
             std::cout << "Opcion invalida!\n";
         }
+
+
     }
 
 

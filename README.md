@@ -4,7 +4,6 @@ Juego de aventura en C++ hecho como proyecto final de Programación Orientada a 
 
 Un gato curioso sigue a un pequeño fantasma con audífonos por una biblioteca infinita, de sección en sección, a través de puertas. Cada puerta es un cambio de nivel, y cerrarla con fuerza (un *door slam*) puede hacer caer estanterías sobre los enemigos... o sobre ti. La meta es alcanzar al fantasma y hablar con él.
 
-> **Estado:** en desarrollo. Versión de texto en construcción.
 
 ## Versiones del juego
 

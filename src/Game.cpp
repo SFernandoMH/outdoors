@@ -2,6 +2,7 @@
 
 #include "Bandage.h"
 #include "DarkBeing.h"
+#include "InvisibleCreature.h"
 #include "iostream"
 #include "Spell.h"
 #include "Armor.h"
@@ -25,38 +26,48 @@ std::vector<Entity*> Game::getEntitiesCurrentRoom() const {
 }
 
 void Game::buildMap() {
-    Room* entrada = new Room("Entrada de la biblioteca");
-    Room* pasillo = new Room("Pasillo de libros");
-    Room* esquinaMisteriosa = new Room("Esquina abandonada");
-    Room* segundoPasillo = new Room("Segundo Pasillo de libros");
-    Room* esquinaReluciente = new Room("Esquina Reluciente");
+    Room* entrada = new Room("Entrada de la biblioteca");        // 0
+    Room* esquinaReluciente = new Room("Esquina Reluciente");    // 1
+    Room* pasillo = new Room("Pasillo de libros");               // 2
+    Room* esquinaMisteriosa = new Room("Esquina abandonada");    // 3
+    Room* bordeLuciente = new Room("Borde Luciente");            // 4
+    Room* segundoPasillo = new Room("Segundo Pasillo de libros");// 5
+    Room* bordeOscuro = new Room("Borde Oscuro");                // 6
+    Room* noEnd = new Room("Pasillo estrellado");
 
 
-    //20 habitaciones
+
+    // 8 habitaciones
     rooms.push_back(entrada);
+    rooms.push_back(esquinaReluciente);
     rooms.push_back(pasillo);
     rooms.push_back(esquinaMisteriosa);
+    rooms.push_back(bordeLuciente);
     rooms.push_back(segundoPasillo);
-    rooms.push_back(esquinaReluciente);
+    rooms.push_back(bordeOscuro);
+    rooms.push_back(noEnd);
 
-    //Entrada
+
+    // 0 Entrada
     entrada->addShelf(new Shelf(3));
     entrada->addShelf(new Shelf(4));
 
     entrada->getShelves()[0]->addItem(new Spell("Aumento de dano x2", 2));
     for (Shelf* shelf : entrada->getShelves()) {
-        shelf->addItem(new Bandage("Benda"));
+        shelf->addItem(new Bandage("Venda"));
     }
 
-    //conexion entrada a pasillo -> conectado a 3 habitaciones
 
-    Door* doorEPone = new Door(entrada, pasillo);
-    doors.push_back(doorEPone);
-    entrada->addDoor(doorEPone);
-    pasillo->addDoor(doorEPone);
+    // 1 esquina reluciente
+
+    esquinaReluciente->addShelf(new Shelf(10));
+    esquinaReluciente->addShelf(new Shelf(8));
+    esquinaReluciente->addShelf(new Shelf(9));
+    esquinaReluciente->getShelves()[0]->addItem(new Spell("Aumento de dano x2",2));
+    esquinaReluciente->getShelves()[2]->addItem(new Bandage("Venda"));
 
 
-    //pasillo
+    // 2 pasillo
     pasillo->addShelf(new Shelf(5));
     pasillo->addShelf(new Shelf(8));
     pasillo->addShelf(new Shelf(9));
@@ -65,14 +76,7 @@ void Game::buildMap() {
     pasillo->getShelves()[2]->addItem(new Spell("Aumento de dano x4",4));
     pasillo->addEntity(new DarkBeing());
 
-    //conexion pasillo a esquina
-
-    Door* doorPEtwo = new Door(pasillo, esquinaMisteriosa);
-    doors.push_back(doorPEtwo);
-    pasillo->addDoor(doorPEtwo);
-    esquinaMisteriosa->addDoor(doorPEtwo);
-
-    //Esquina
+    // 3 Esquina
 
     esquinaMisteriosa->addShelf(new Shelf(10));
     esquinaMisteriosa->getShelves()[0]->addItem(new Bandage("Botiquin")); // posible armadura
@@ -80,7 +84,16 @@ void Game::buildMap() {
     esquinaMisteriosa->addEntity(new DarkBeing());
     esquinaMisteriosa->addEntity(new DarkBeing());
 
-    // Pasillo 2
+    // 4 borde Luciente
+
+    bordeLuciente->addShelf(new Shelf(10));
+
+    bordeLuciente->getShelves()[0]->addItem(new Armor("Armadura de cuero",8));
+    bordeLuciente->getShelves()[0]->addItem(new Bandage("Venda"));
+    bordeLuciente->getShelves()[0]->addItem(new Bandage("Venda"));
+
+
+    // 5 Segundo Pasillo
 
     segundoPasillo->addShelf(new Shelf(6));
     segundoPasillo->addShelf(new Shelf(10));
@@ -94,26 +107,89 @@ void Game::buildMap() {
     segundoPasillo->addEntity(new DarkBeing());
     segundoPasillo->addEntity(new DarkBeing());
 
-    //segunda puerta de pasillo a segundo pasillo
+    segundoPasillo->getEntities()[0]->setDamagePA(9);
+    segundoPasillo->getEntities()[1]->setDamagePA(9);
+    segundoPasillo->getEntities()[2]->setDamagePA(9);
+    segundoPasillo->getEntities()[3]->setDamagePA(9);
+
+
+    //  6 Borde Oscuro
+
+    bordeOscuro->addShelf(new Shelf(2));
+    bordeOscuro->addShelf(new Shelf(10));
+    bordeOscuro->getShelves()[0]->addItem(new Spell("Aumento de dano x10",10));
+
+    bordeOscuro->addEntity(new DarkBeing());
+    bordeOscuro->addEntity(new DarkBeing());
+
+    // 8 Noend
+
+    noEnd->addEntity(new InvisibleCreature());
+    noEnd->addEntity(new InvisibleCreature());
+
+    // 0A2 FILA 0
+
+    Door* doorEPone = new Door(entrada, pasillo);
+    doors.push_back(doorEPone);
+    entrada->addDoor(doorEPone);
+    pasillo->addDoor(doorEPone);
+
+    // 2A3 FILA 1
+
+    Door* doorPEtwo = new Door(pasillo, esquinaMisteriosa);
+    doors.push_back(doorPEtwo);
+    pasillo->addDoor(doorPEtwo);
+    esquinaMisteriosa->addDoor(doorPEtwo);
+
+    // 2A5
 
     Door* doorPP2 = new Door(pasillo, segundoPasillo);
     doors.push_back(doorPP2);
     pasillo->addDoor(doorPP2);
     segundoPasillo->addDoor(doorPP2);
 
-    //esquina reluciente
+    // 2A1
+
+    Door* door2A1 = new Door(pasillo,esquinaReluciente);
+    doors.push_back(door2A1);
+    pasillo->addDoor(door2A1);
+    esquinaReluciente->addDoor(door2A1);
+
+    // 1A4 FILA 2
+
+    Door* door1A4 = new Door(esquinaReluciente,bordeLuciente);
+    doors.push_back(door1A4);
+    esquinaReluciente->addDoor(door1A4);
+    bordeLuciente->addDoor(door1A4);
+
+    // 4A5
+
+    Door* door4A5 = new Door(bordeLuciente,segundoPasillo);
+    doors.push_back(door4A5);
+    bordeLuciente->addDoor(door4A5);
+    segundoPasillo->addDoor(door4A5);
 
 
+    // 3A6
 
+    Door* door3A6 = new Door(esquinaMisteriosa,bordeOscuro);
+    doors.push_back(door3A6);
+    esquinaMisteriosa->addDoor(door3A6);
+    bordeOscuro->addDoor(door3A6);
 
+    // 6A5
 
+    Door* door6A5 = new Door(bordeOscuro,segundoPasillo);
+    doors.push_back(door6A5);
+    bordeOscuro->addDoor(door6A5);
+    segundoPasillo->addDoor(door6A5);
 
+    // 6A8
 
-
-
-
-
-
+    Door* door6A8 = new Door(segundoPasillo,noEnd);
+    doors.push_back(door6A8);
+    segundoPasillo->addDoor(door6A8);
+    noEnd->addDoor(door6A8);
 
 
     //Por defecto inicias en entrada
@@ -123,12 +199,19 @@ void Game::buildMap() {
 
 
 int Game::showMenuRoom() const {
+
+    if (currentRoom == rooms[7] && !rooms[7]->hasLivinEntities()) {
+        std::cout << "Bibliotecario : hola...\n";
+        std::cout << "Has completado el juego\n";
+        return 0;
+    }
+
     if (player->isAlive() == false) {
         std::cout << "Solo queria encontrarlo...";
         return 0;
     }
-    std::cout << "Estas en: " << currentRoom->getDescription()<< "\n"
-                 "vida : ";
+    std::cout << "Estas en: " << currentRoom->getDescription()<< " // "
+                 "Tu vida : "<< player->getHp() << "\n";
 
     if (currentRoom->hasLivinEntities() && player->isAlive()) {return 4;}
 
@@ -233,17 +316,20 @@ void Game::crossDoor() {
                 if (shelf->getisStanding() == false) {
                     std::cout << "Un estante de la habitacion " << previous->getDescription()<< " se cayo!\n";
                     std::cout << "le aplica 60 de dano a todas los enemigos!\n";
-                    for (Entity* entity : previous->getEntities()) {
-                        if (entity->isAlive() == false) {
-                            std::cout << "Un enemigo murio\n";
-                        }
                     }
                 }
+            int counter = 0;
+            for (Entity* e : previous->getEntities()) {
+                if ( e->isAlive() == false ) {
+                    counter += 1;
+                }
             }
-
+            std::cout << "Murieron : "<< counter << " entidades.\n";
+            previous->removeDeadEntities();
+            }
         }
     }
-}
+
 
 void Game::fight() {
     
@@ -265,7 +351,7 @@ void Game::fight() {
             std::cout << i + 1 << " . " << enemies[i]->getName() << " vida : " << enemies[i]->getHp() <<"\n";
         }
         std::cout << "Que deseas hacer?\n"
-                     "1. Atacar\n2. Usar objeto\n>";
+                     "1. Atacar\n2. Usar objeto\n3. Huir\n>";
         int option;
         std::cin >> option;
         if (option == 1) {
@@ -301,7 +387,8 @@ void Game::fight() {
             } else {
                 continue;
             }
-
+        } else if (option == 3) {
+            return;
         } else {
             std::cout << "Ingresa una opcion valida!\n";
             continue;
@@ -325,8 +412,8 @@ void Game::fight() {
 }
 
 
+
+
 void Game::run() {
-    std::cout << this->player->getHp() << "\n";
-    this->showInventory();
 
 }

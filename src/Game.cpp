@@ -186,10 +186,10 @@ void Game::buildMap() {
 
     // 6A8
 
-    Door* door6A8 = new Door(segundoPasillo,noEnd);
-    doors.push_back(door6A8);
-    segundoPasillo->addDoor(door6A8);
-    noEnd->addDoor(door6A8);
+    Door* door5A8 = new Door(segundoPasillo,noEnd);
+    doors.push_back(door5A8);
+    segundoPasillo->addDoor(door5A8);
+    noEnd->addDoor(door5A8);
 
 
     //Por defecto inicias en entrada

@@ -2,9 +2,9 @@
 #include <iostream>
 int main() {
     Game game;
-    int option = -1;
-    while (option != 0) {
-        int useroption = game.showMenuRoom();
+    int useroption = -1;
+    while (useroption != 0) {
+        useroption = game.showMenuRoom();
         if (useroption == 1) {
             game.showInventory();
         } else if (useroption == 2) {

@@ -46,8 +46,8 @@ En la versión de texto, estas mismas acciones se eligen escribiendo la opción 
 - [x] Dos tipos de enemigo con ataque propio
 - [x] Puertas y portazo
 - [x] Objetos e inventario (`std::vector`)
-- [ ] Bucle del juego y combate por turnos
-- [ ] Documento final y presentación
+- [x] Bucle del juego y combate por turnos
+- [x] Documento final y presentación
 - [ ] Versión gráfica con SFML (opcional)
 
 ## Estructura del proyecto

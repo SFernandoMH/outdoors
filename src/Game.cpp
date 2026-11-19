@@ -411,6 +411,3 @@ void Game::fight() {
 
 }
 
-void Game::run() {
-
-}
